@@ -7,28 +7,26 @@ function Product(productName, price, curency, discount) {
   this.productName = productName;
   this.price = price;
   this.curency = curency;
-  this.discount = discount;
 }
 
 function MethodForProduct() {
-  this.getProductInfo = function (productName, price, curency) {
-    return `Product name: ${productName}
-price: ${price}
-curency: ${curency}`;
+  this.getProductInfo = function () {
+    return `Product name: ${this.productName}
+price: ${this.price}
+curency: ${this.curency}`;
   };
   this.showProductInfo = function (info) {
     console.log(info);
   };
-  this.discountForProduct = function (price, discount, curency) {
-    price = price - (price * discount) / 100;
-    return `discount: ${discount}%
-discuont price: ${price} ${curency}`;
+  this.discountForProduct = function (discount) {
+    this.price = this.price - (this.price * discount) / 100;
+    return this.price;
   };
 }
 
 Product.prototype = new MethodForProduct();
 
 const telephone = new Product("Samsung", 15000, "ua");
-telephone.showProductInfo(telephone.getProductInfo("Samsung", 15000, "ua"));
-telephone.showProductInfo(telephone.discountForProduct(1500, 12, "ua"));
+telephone.showProductInfo(telephone.getProductInfo());
+telephone.showProductInfo(telephone.discountForProduct(15));
 
